@@ -1,0 +1,9 @@
+{
+    "success":{
+        "USER_REGISTER_SUCCESS": "User registred successfully."
+    },
+    "error":{
+        "USER_REGISTER_FAILED": "Error occurred while register user.",
+        "USER_ALREADY_EXISTS": "User already exists."
+    }
+}
