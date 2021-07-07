@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-dev": "rimraf ./build && npm run copy-build && npm run watch",
     "copy-build": "copyfiles .env* locales/i18n/*.json package.json* build",
-    "start": "set NODE_ENV=local && ts-node-dev src/index.ts",
+    "start": "set NODE_ENV=local && ts-node-dev build/src/index.js",
     "watch": "tsc -w",
     "start:dev": "nodemon",
     "dev": "nodemon build/src/index.js"
