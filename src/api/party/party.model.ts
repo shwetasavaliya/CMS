@@ -3,6 +3,7 @@ import { IParty } from "./party.interface";
 
 export const PartySchema: Mongoose.Schema<IParty> = new Mongoose.Schema({
     userId: { type: Mongoose.Schema.Types.ObjectId, ref: 'user' },
+    partyInvoiceUrl: { type: String , default : null},
     partyFirstName: { type: String, required: true },
     partyMiddleName: { type: String, required: true },
     partyLastName: { type: String, required: true },

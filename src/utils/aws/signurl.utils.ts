@@ -37,17 +37,17 @@ export const uploadPdf = async (fileName: any) => {
 
     const myBucket = AWS_S3_BUCKET_NAME;
     const myKey = new Date().getTime() + '.pdf';
-    const parmas = {
+    const params = {
         Bucket: myBucket,
         Body: fileName,
         Key: 'invoice/' + myKey,
     }
 
     const data = await new Promise((resolve, reject) => {
-        s3.putObject(parmas, (err, data) => {
+        s3.putObject(params, (err, data) => {
             if (err) reject(err)
             resolve(data);
-        })
+        })        
     })
-    return { parmas, fileName: myKey };
+    return { params, fileName: myKey };
 }

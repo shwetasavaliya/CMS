@@ -42,7 +42,7 @@ exports.PASSWORD = process.env.PASSWORD || '';
 exports.GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '';
 exports.GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET || '';
 exports.BASE_URL = process.env.BASE_URL || '';
-exports.AWS_INVOICE_URL = process.env.INVOICE_URL || '';
+exports.AWS_INVOICE_URL = process.env.AWS_INVOICE_URL || '';
 exports.MONGO_CONFIG = {
     poolSize: parseInt(process.env.MONGO_POOL_SIZE || '') || 5
 };

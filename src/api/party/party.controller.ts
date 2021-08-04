@@ -1,6 +1,6 @@
 import { Body, Delete, Get, JsonController, Post, Put, Req, Res, UseBefore } from "routing-controllers";
 import PartyService from "./party.service";
-import { PartyDeleteDTO, PartyDTO, PartyUpdateDTO } from "./party.validator";
+import { PartyDeleteDTO, PartyDTO, PartyInvoiceDTO, PartyUpdateDTO } from "./party.validator";
 import { Auth } from "../../middleware/auth"
 import ExcelJS from 'exceljs'
 import ejs from 'ejs'
@@ -193,7 +193,7 @@ export default class PartyController {
 
             ];
 
-            let count = 1;
+            var count = 1;
 
             partyData.forEach(partyData => {
                 (partyData as any).s_no = count;
@@ -215,26 +215,38 @@ export default class PartyController {
         }
     }
 
-    @Get('/get-party/pdf')
+    @Post('/get-party-invoice/pdf')
     @UseBefore(Auth)
-    async getParty(@Req() request: any, @Res() response: any) {
+    async getParty(@Req() request: any, @Res() response: any, @Body({ validate: true }) body: PartyInvoiceDTO) {
         try {
             const { id } = request?.data || { id: "" };
-            const partyData = await this.partyService.find({ userId: id })
-            var html = await ejs.renderFile("invoice.ejs", { partyData }, { async: true });
+            const { _id } = body;
 
-            const browser = await puppeteer.launch({ headless: true })
+            const partyData = await this.partyService.findOne({ userId: id, _id })
+            if (!partyData) return response.formatter.error({}, false, "PARTY_DATA_NOT_FOUND")
 
-            const page = await browser.newPage()
-            await page.setContent(html, { waitUntil: 'domcontentloaded' })
+            if (partyData.partyInvoiceUrl != null) {
+                const url = partyData.partyInvoiceUrl;
+                return response.formatter.ok({ url }, true, "INVOICE_CREATED_SUCCESS");
+            }
+            else {
 
-            const pdf = await page.pdf({ path: "pdf/invoice.pdf" })
-            const upload = await uploadPdf(pdf);
-            const awsInvoicePdf = AWS_INVOICE_URL + upload.fileName;
-            console.log("awsInvoicePdf ::: ", awsInvoicePdf);
+                var html = await ejs.renderFile("invoice.ejs", { partyData }, { async: true });
+                const browser = await puppeteer.launch({ headless: true })
 
-            await browser.close()
-            return response.formatter.ok(awsInvoicePdf, true, "INVOICE_CREATED_SUCCESS");
+                const page = await browser.newPage()
+                await page.setContent(html, { waitUntil: 'domcontentloaded' })
+                
+                const pdf = await page.pdf({ path: "pdf/invoice.pdf" })
+                const upload = await uploadPdf(pdf);
+                
+                const awsInvoicePdf = AWS_INVOICE_URL + upload.fileName;
+                
+                const updateUrl = await this.partyService.updateOne({ _id }, { partyInvoiceUrl: awsInvoicePdf }, { new: true })
+                if (!updateUrl) return response.formatter.error({}, false, "INVOICE_CREATING_FAILED");
+                await browser.close()
+                return response.formatter.ok({ awsInvoicePdf }, true, "INVOICE_CREATED_SUCCESS");
+            }
 
         } catch (error) {
             console.log("ERR:: ", error);

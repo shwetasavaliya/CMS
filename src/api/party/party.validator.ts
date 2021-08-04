@@ -142,3 +142,8 @@ export class PartyDeleteDTO {
     @IsString()
     _id: string
 }
+
+export class PartyInvoiceDTO {
+    @IsString()
+    _id: string
+}

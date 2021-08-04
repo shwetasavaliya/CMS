@@ -10,6 +10,7 @@ export interface IParty extends Mongoose.Document {
     partyGstNo: string;
     partyPanNo: string;
     userId?: Mongoose.Schema.Types.ObjectId;
+    partyInvoiceUrl?:string,
     partyAadharCardNo: string;
     bankName: string;
     bankAccountNo: string;
