@@ -14,7 +14,7 @@ const connectMongoDB = async () => {
         };
         (<any>mongoose).Promise = bluebird;
         mongoose.connect(MONGO_URL, options);
-    
+
         // mongoose.set('debug', true);
     
         const mongoDb = mongoose.connection;

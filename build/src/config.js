@@ -20,7 +20,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MONGO_CONFIG = exports.MONGO_URL = exports.PORT = exports.isLocal = void 0;
+exports.MONGO_CONFIG = exports.AWS_INVOICE_URL = exports.BASE_URL = exports.GOOGLE_CLIENT_SECRET = exports.GOOGLE_CLIENT_ID = exports.PASSWORD = exports.USEREMAIL = exports.REFRESH_TOKEN = exports.REDIRECT_URL = exports.CLIENT_SECRET = exports.CLIENT_ID = exports.AWS_S3_BUCKET_NAME = exports.AWS_SECRET_ACCESS_KEY = exports.AWS_ACCESS_KEY_ID = exports.SECRET_KEY = exports.MONGO_URL = exports.PORT = exports.isLocal = void 0;
 var path = __importStar(require("path"));
 var envType = (_a = process.env.NODE_ENV) === null || _a === void 0 ? void 0 : _a.trim();
 exports.isLocal = envType === 'local';
@@ -29,6 +29,20 @@ require('dotenv').config({
 });
 exports.PORT = process.env.PORT || 3100;
 exports.MONGO_URL = process.env.MONGO_URL || '';
+exports.SECRET_KEY = process.env.SECRET_KEY || '';
+exports.AWS_ACCESS_KEY_ID = process.env.AWS_ACCESS_KEY_ID || '';
+exports.AWS_SECRET_ACCESS_KEY = process.env.AWS_SECRET_ACCESS_KEY || '';
+exports.AWS_S3_BUCKET_NAME = process.env.AWS_S3_BUCKET_NAME || '';
+exports.CLIENT_ID = process.env.CLIENT_ID || '';
+exports.CLIENT_SECRET = process.env.CLIENT_SECRET || '';
+exports.REDIRECT_URL = process.env.REDIRECT_URL || '';
+exports.REFRESH_TOKEN = process.env.REFRESH_TOKEN || '';
+exports.USEREMAIL = process.env.USEREMAIL || '';
+exports.PASSWORD = process.env.PASSWORD || '';
+exports.GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '';
+exports.GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET || '';
+exports.BASE_URL = process.env.BASE_URL || '';
+exports.AWS_INVOICE_URL = process.env.INVOICE_URL || '';
 exports.MONGO_CONFIG = {
     poolSize: parseInt(process.env.MONGO_POOL_SIZE || '') || 5
 };

@@ -12,12 +12,17 @@ var routes_1 = __importDefault(require("./routes"));
 var mongo_db_1 = __importDefault(require("./utils/db/mongo.db"));
 var typeorm_1 = require("typeorm");
 var typeorm_typedi_extensions_1 = require("typeorm-typedi-extensions");
+var swagger_handler_1 = __importDefault(require("./swagger/swagger-handler"));
+var passport_1 = __importDefault(require("passport"));
 var Server = /** @class */ (function () {
     function Server() {
         this.app = express_1.default();
         this.app.use(body_parser_1.json());
         this.app.use(response_1.responseEnhancer());
         this.app.use(cors_1.default());
+        this.app.use('/api-docs', swagger_handler_1.default);
+        this.app.use(passport_1.default.initialize());
+        this.app.use(passport_1.default.session());
         routes_1.default(this.app);
         typeorm_1.useContainer(typeorm_typedi_extensions_1.Container);
         mongo_db_1.default();

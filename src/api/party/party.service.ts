@@ -7,17 +7,18 @@ import {
 } from "mongoose";
 import { IBaseService } from "src/baseService/baseService.interface";
 import { Nullable } from "src/constants/customTypes";
-import { IUser } from "./user.interface";
-import { UserModel } from "./user.model";
+import { IParty } from "./party.interface";
+import { PartyModel } from "./party.model";
 
-export default class UserService implements IBaseService<IUser> {
-    private model: Model<IUser>;
+
+export default class PartyService implements IBaseService<IParty> {
+    private model: Model<IParty>;
 
     public constructor() {
-        this.model = UserModel;
+        this.model = PartyModel;
     }
 
-    create = async (item: IUser): Promise<IUser> => {
+    create = async (item: IParty): Promise<IParty> => {
         return this.model.create(item);
     };
 
@@ -25,7 +26,7 @@ export default class UserService implements IBaseService<IUser> {
         id: string,
         projection: any = {},
         options: QueryOptions = { lean: true }
-    ): Promise<Nullable<IUser>> => {
+    ): Promise<Nullable<IParty>> => {
         return this.model.findById(id, projection, options);
     };
 
@@ -33,34 +34,34 @@ export default class UserService implements IBaseService<IUser> {
         query: any,
         options: QueryOptions = {},
         projection?: any | null
-    ): Promise<Nullable<IUser>> => {
+    ): Promise<Nullable<IParty>> => {
         return this.model.findOne(query, projection, options).lean();
     };
 
     updateOne = async (
         query: any,
-        updateObj: UpdateQuery<IUser>,
+        updateObj: UpdateQuery<IParty>,
         options: QueryFindOneAndUpdateOptions = { new: true, upsert: true }
-    ): Promise<Nullable<IUser>> => {
+    ): Promise<Nullable<IParty>> => {
         return this.model.findOneAndUpdate(query, updateObj, options).lean();
     };
 
     find = async (
-        query: FilterQuery<IUser>,
+        query: FilterQuery<IParty>,
         projection: any = {},
         options: QueryOptions = { lean: true }
-    ): Promise<IUser[]> => {
+    ): Promise<IParty[]> => {
         return this.model.find(query, projection, options);
     };
 
     update = async (
         query: any,
-        updateObj: UpdateQuery<IUser>
-    ): Promise<Nullable<IUser>> => {
+        updateObj: UpdateQuery<IParty>
+    ): Promise<Nullable<IParty>> => {
         return this.model.findByIdAndUpdate(query, updateObj, { new: true });
     };
 
-    delete = async (query: any): Promise<Nullable<IUser>> => {
-        return this.model.findByIdAndRemove('id');
+    delete = async (query: any): Promise<Nullable<IParty>> => {
+        return this.model.findByIdAndRemove(query);
     };
 }

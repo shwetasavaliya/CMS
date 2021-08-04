@@ -1,9 +1,53 @@
 {
-    "success":{
-        "USER_REGISTER_SUCCESS": "User registred successfully."
-    },
-    "error":{
-        "USER_REGISTER_FAILED": "Error occurred while register user.",
-        "USER_ALREADY_EXISTS": "User already exists."
-    }
+  "success": {
+    "USER_REGISTER_SUCCESS": "User registred successfully.",
+    "USER_LOGIN_SUCCESS": "User login success.",
+    "FILE_UPLOAD_SUCCESS": "File upload success.",
+    "USER_UPDATE_SUCCESS": "User upadate success.",
+    "FILE_UPDATE_SUCCESS": "File update success.",
+    "USER_TOKEN_IS_VALID": "User token is valid.",
+    "EMAIL_CHECK_SUCCESS": "Email check success.",
+    "EMAIL_SEND_SUCCESS": "Email send success.",
+    "OTP_VERIFICATION_SUCCESS": "Otp verification success.",
+    "FORGOT_PASSWORD_SUCCESS": "Forgot password success.",
+    "PARTY_ADDED_SUCCESS": "Party added success.",
+    "PARTY_UPDATE_SUCCESS": "Party update success.",
+    "PARTY_DELETE_SUCCESS" : "Party delete success.",
+    "PARTY_GETDATA_SUCCESS":"party getdata success.",
+    "CHANGE_PASSWORD_SUCCESS":"Change password success.",
+    "INVOICE_CREATED_SUCCESS" : "Invoice created successfully."
+  },
+  "error": {
+    "USER_REGISTER_FAILED": "Error occurred while register user.",
+    "USER_ALREADY_EXISTS": "User already exists.",
+    "USER_NOT_EXISTS":"User not exists.",
+    "USER_LOGIN_FAILED": "User login failed.",
+    "USER_IS_NOT_FOUND": "User is not found.",
+    "INVALID_LOGIN_DETAILS": "Invalid login details.",
+    "COMPANY_REGISTRATION_FAILED": "Company registration failed.",
+    "FILE_UPLOAD_FAILED": "File upload failed.",
+    "USER_UPDATE_FAILED": "User update failed.",
+    "FILE_UPDATE_FAILED": "File update failed.",
+    "USER_DATA_IS_NOT_FOUND": "USer data is not found.",
+    "TOKEN_IS_INVALID": " Token is invalid.",
+    "EMAIL_CHECK_FAILED": "Email check failed.",
+    "ENTER_VALID_EMAIL": "Enter valid email.",
+    "OTP_IS_NOT_MATCH": "Otp is not match.",
+    "OTP_VERIFICATION_FAILED": "Otp verification failed.",
+    "FORGOT_PASSWORD_FAILED": "Forgot password failed.",
+    "PASSWORD_NOT_MATCH": "Password not match.",
+    "PASSWORD_UPDATE_FAILED": "Password update failed.",
+    "OTP_IS_NOT_UPDATE": "Otp is not update.",
+    "LINK_GENERATE_FAILED": "Link generate failed.",
+    "INVALID_TOKEN": "Invalid token.",
+    "EMAIL_SEND_FAILED": "Email send failed.",
+    "LOGIN_FAILED": "Login failed.",
+    "PARTY_ADDED_FAILED":"Party added failed.",
+    "PARTY_DATA_NOT_FOUND": "Party data not found.",
+    "PARTY_UPDATE_FAILED": "Party update failed.",
+    "PARTY_DELETE_FAILED":"Party delete failed.",
+    "PARTY_GETDATA_FAILED":"Party getdata failed.",
+    "CHANGE_PASSWORD_FAILED":"Change password failed.",
+    "INVOICE_CREATING_FAILED" : "Invoice created failed."
+  }
 }
