@@ -38,7 +38,6 @@ export default class PartyController {
                 contactPersonAddress,
             } = body
 
-            
             const partyDetails: any = {
                 userId: id,
                 partyFirstName,
