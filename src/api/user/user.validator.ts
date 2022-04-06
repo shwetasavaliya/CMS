@@ -3,40 +3,49 @@ import {
   IsObject,
   IsOptional,
   IsString,
+  IsNumber,
   ValidateNested,
 } from "class-validator";
 
 export class UserDTO {
+  @IsString()
+  userName: string;
+
   @IsEmail()
   email: string;
 
   @IsString()
   password: string;
 
-  @IsString()
-  firstName: string;
+  @IsNumber()
+  phoneNo: number;
+}
+
+export class UserEmailDTO {
+  @IsEmail()
+  email: string;
 
   @IsString()
-  middleName: string;
+  password: string;
+}
+
+export class OtpSendDTO {
+  @IsEmail()
+  email: String;
+}
+
+export class matchOtpDTO {
+  @IsEmail()
+  email: string;
 
   @IsString()
-  lastName: string;
+  otp: string;
+}
+
+export class resetPasswordDTO {
+  @IsEmail()
+  email: string;
 
   @IsString()
-  userName: string;
-
-  @IsString()
-  phone: string;
-
-  @IsString()
-  @IsOptional()
-  city: string;
-
-  @IsString()
-  @IsOptional()
-  state: string;
-
-  @IsString()
-  @IsOptional()
-  country: string;
+  password: string;
 }

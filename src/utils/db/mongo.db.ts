@@ -25,8 +25,8 @@ const connectMongoDB = async () => {
         mongoDb.once('open', () => {
           console.log(`Connected to mongo database`);
         });
-      } catch (err) {
-        console.error('error:', err.message);
+      } catch (error) {
+        console.error('error:', error.message);
       }
 }
 

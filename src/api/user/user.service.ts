@@ -12,7 +12,7 @@ import { UserModel } from "./user.model";
 
 export default class UserService implements IBaseService<IUser> {
     private model: Model<IUser>;
-
+  
     public constructor() {
         this.model = UserModel;
     }
