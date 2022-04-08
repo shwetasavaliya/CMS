@@ -38,8 +38,11 @@ export const responseEnhancer = () => (
 const _generateFormatters = (req: Request, res: Response) => {
   const formatter = {} as ResponseFunction;
   let responseBody = {};
-  const language = req.body?.language || req.headers?.language || 'en',
+  const language:any = req.headers?.language || 'en',
     lang = getLanguage(language);
+    // console.log("lang....",lang);
+    // console.log("language....",language);
+    
   formatter['ok'] = (data: any, status: boolean, code: string) => {
     responseBody = _generateSuccessResponse({ data, status, code, lang });
     return responseBody;

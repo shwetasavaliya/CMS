@@ -24,9 +24,7 @@ import {
   OtpGenerate,
 } from "../../utils/comman/comman.utils";
 import { sendMail } from "../../utils/comman/mailSend";
-import { get } from "http";
-import { request } from "https";
-import { response } from "express";
+
 
 @JsonController("/user")
 export default class UserController {

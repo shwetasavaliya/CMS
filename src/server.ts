@@ -8,7 +8,7 @@ import connectMongoDB from './utils/db/mongo.db';
 import { useContainer } from 'typeorm';
 import { Container } from 'typeorm-typedi-extensions';
 import swaggerRoutes from './swagger/swagger-handler'
-import passport from 'passport';
+
 
 class Server {
 
@@ -19,8 +19,6 @@ class Server {
         this.app.use(responseEnhancer());
         this.app.use(cors());
         this.app.use('/api-docs', swaggerRoutes);
-        this.app.use(passport.initialize());
-        this.app.use(passport.session());
         initRoute(this.app)
         useContainer(Container);
         connectMongoDB();
