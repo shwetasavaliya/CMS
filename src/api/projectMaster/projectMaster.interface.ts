@@ -3,8 +3,10 @@ import * as Mongoose from "mongoose";
 export interface IProjectMaster extends Mongoose.Document {
   projectTitle?: String;
   projectAbstract?: String;
-  technology?: String;
-  language?: String;
+  isFrontEnd? : Boolean;
+  isBackEnd? : Boolean;
+  frontLanguageId? : String;
+  backLanguageId? : String;
   databaseName?: String;
   deployment?: String;
   currentStatus?: Boolean;

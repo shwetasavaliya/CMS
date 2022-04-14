@@ -7,17 +7,17 @@ import {
 } from "mongoose";
 import { IBaseService } from "src/baseService/baseService.interface";
 import { Nullable } from "src/constants/customTypes";
-import { IProjectMaster } from "./projectMaster.interface";
-import { ProjectMasterModel } from "./projectMaster.model";
+import { IUserJoin } from "./userJoinMaster.interface";
+import { UserJoinModel } from "./userJoinMaster.model";
 
-export default class ProjectMasterService implements IBaseService<IProjectMaster> {
-    private model: Model<IProjectMaster>;
+export default class UserJoinService implements IBaseService<IUserJoin> {
+    private model: Model<IUserJoin>;
   
     public constructor() {
-        this.model = ProjectMasterModel;
+        this.model = UserJoinModel;      
     }
 
-    create = async (item: IProjectMaster): Promise<IProjectMaster> => {
+    create = async (item: IUserJoin): Promise<IUserJoin> => {
         return this.model.create(item);
     };
 
@@ -25,7 +25,7 @@ export default class ProjectMasterService implements IBaseService<IProjectMaster
         id: string,
         projection: any = {},
         options: QueryOptions = { lean: true }
-    ): Promise<Nullable<IProjectMaster>> => {
+    ): Promise<Nullable<IUserJoin>> => {
         return this.model.findById(id, projection, options);
     };
 
@@ -33,38 +33,34 @@ export default class ProjectMasterService implements IBaseService<IProjectMaster
         query: any,
         options: QueryOptions = {},
         projection?: any | null
-    ): Promise<Nullable<IProjectMaster>> => {
+    ): Promise<Nullable<IUserJoin>> => {
         return this.model.findOne(query, projection, options).lean();
     };
 
     updateOne = async (
         query: any,
-        updateObj: UpdateQuery<IProjectMaster>,
+        updateObj: UpdateQuery<IUserJoin>,
         options: QueryFindOneAndUpdateOptions = { new: true, upsert: true }
-    ): Promise<Nullable<IProjectMaster>> => {
+    ): Promise<Nullable<IUserJoin>> => {
         return this.model.findOneAndUpdate(query, updateObj, options).lean();
     };
 
     find = async (
-        query: FilterQuery<IProjectMaster>,
+        query: FilterQuery<IUserJoin>,
         projection: any = {},
         options: QueryOptions = { lean: true }
-    ): Promise<IProjectMaster[]> => {
+    ): Promise<IUserJoin[]> => {
         return this.model.find(query, projection, options);
     };
 
     update = async (
         query: any,
-        updateObj: UpdateQuery<IProjectMaster>
-    ): Promise<Nullable<IProjectMaster>> => {
+        updateObj: UpdateQuery<IUserJoin>
+    ): Promise<Nullable<IUserJoin>> => {
         return this.model.findByIdAndUpdate(query, updateObj, { new: true });
     };
 
-    delete = async (query: any): Promise<Nullable<IProjectMaster>> => {
+    delete = async (query: any): Promise<Nullable<IUserJoin>> => {
         return this.model.findByIdAndRemove(query);
     };
-
-    aggregate = async (pipeline: any[]):Promise<IProjectMaster[]>=> {
-        return this.model.aggregate(pipeline);
-    }
 }

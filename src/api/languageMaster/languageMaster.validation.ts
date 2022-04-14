@@ -19,3 +19,17 @@ import {
     @IsString()
     language: String;
   }
+
+  export class UpdateLanguageDTO {
+    @IsBoolean()
+    @IsOptional()
+    isFrontEnd: Boolean;
+
+    @IsBoolean()
+    @IsOptional()
+    isBackEnd: Boolean;
+
+    @IsString()
+    @IsOptional()
+    language: String;
+  }

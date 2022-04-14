@@ -10,7 +10,7 @@ import {
     UseBefore,
   } from "routing-controllers";
   import LanguageMasterService from "./languageMaster.service";
-  import { LanguageDTO } from "./languageMaster.validation";
+  import { LanguageDTO,UpdateLanguageDTO } from "./languageMaster.validation";
   import { Auth } from "../../middleware/auth";
   import { get } from "http";
   import { request } from "https";
@@ -29,13 +29,16 @@ import {
     ) {
         try{
           const { isFrontEnd,isBackEnd,language } = body;
+          const languageExist = await this.languageMasterService.findOne({language});
+          if(languageExist){
+            return response.formatter.error({}, false, "LANGUAGE_ALREADY_EXISTS");
+          }
           const languageData:any = { 
             isFrontEnd,
             isBackEnd,
             language,
             createdBy:request.data.id,
         };
-        console.log(languageData);
         const languageCreate = await this.languageMasterService.create(languageData)
         return  response.formatter.ok(
           { languageCreate },
@@ -52,7 +55,13 @@ import {
     @Get("/get")
     async getLanguage(@Req() request: any, @Res() response: any) {
       try {
-        const getLanguage = await this.languageMasterService.find({});
+        const { isFrontEnd,isBackEnd } = request.query;
+        const data:any = {};
+        if(isFrontEnd == 'true')
+        data.isFrontEnd = true
+        if(isBackEnd == 'true')
+        data.isBackEnd = true
+        const getLanguage = await this.languageMasterService.find(data);
         return  response.formatter.ok(
           { getLanguage },
           true,
@@ -88,7 +97,7 @@ import {
   async updateLanguage(
     @Req() request: any,
     @Res() response: any,
-    @Body({ validate: true }) body: LanguageDTO
+    @Body({ validate: true }) body: UpdateLanguageDTO
   ){
     try {
       const { isFrontEnd,isBackEnd,language } = body;
