@@ -11,25 +11,25 @@ import {
   
   export class LanguageDTO {
     @IsBoolean()
-    isFrontEnd: Boolean;
+    isFrontEnd: boolean;
 
     @IsBoolean()
-    isBackEnd: Boolean;
+    isBackEnd: boolean;
 
     @IsString()
-    language: String;
+    language: string;
   }
 
   export class UpdateLanguageDTO {
     @IsBoolean()
     @IsOptional()
-    isFrontEnd: Boolean;
+    isFrontEnd: boolean;
 
     @IsBoolean()
     @IsOptional()
-    isBackEnd: Boolean;
+    isBackEnd: boolean;
 
     @IsString()
     @IsOptional()
-    language: String;
+    language: string;
   }

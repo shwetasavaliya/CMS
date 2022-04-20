@@ -12,6 +12,7 @@ import UserService from "./user.service";
 import {
   UserDTO,
   UserEmailDTO,
+  sendUserJoinDTO,
   OtpSendDTO,
   matchOtpDTO,
   resetPasswordDTO,
@@ -23,7 +24,7 @@ import {
   comparePassword,
   OtpGenerate,
 } from "../../utils/comman/comman.utils";
-import { sendMail } from "../../utils/comman/mailSend";
+import { sendMail,userJoinMailSend } from "../../utils/comman/mailSend";
 
 
 @JsonController("/user")
@@ -37,19 +38,25 @@ export default class UserController {
     @Body({ validate: true }) body: UserDTO
   ) {
     try {
-      const { userName, email, password, phoneNo } = body;
+      const { userName, email, password,phoneNo, adminId } = body;
       const userExists = await this.userService.findOne({ email });
-
       if (userExists)
         return response.formatter.error({}, false, "USER_ALREADY_EXISTS");
-
       const hashedPassword = await hashPassword(password);
+     
       const userData: any = {
         userName,
         email,
         password: hashedPassword,
-        phoneNo,
+        phoneNo
       };
+
+      if(adminId) {
+        userData.role = "user",userData.adminId = adminId 
+      }
+      else{
+        userData.role = "admin",userData.adminId = adminId
+      }
       const userCreate: any = await this.userService.create(userData);
       const id = userCreate._id;
 
@@ -57,6 +64,7 @@ export default class UserController {
         id,
         userName,
         email,
+        role:userData.role,
         phoneNo,
       });
       return response.formatter.ok(
@@ -92,6 +100,7 @@ export default class UserController {
         id: userEmail._id,
         userName: userEmail.userName,
         email: userEmail.email,
+        role: userEmail.role,
         phoneNo: userEmail.phoneNo,
       });
       return response.formatter.ok(
@@ -102,6 +111,28 @@ export default class UserController {
     } catch (error) {
       console.log("ERR::", error);
       return response.formatter.error({}, false, "USER_LOGIN_FAILED", error);
+    }
+  }
+
+  @Post("/sendInviteUser", { transformResponse: true })
+  async sendUserInvite(
+    @Req() request: any,
+    @Res() response: any,
+    @Body({ validate: true }) body: sendUserJoinDTO
+  ) {
+    try {
+      const { email,userId } = body;
+
+      userJoinMailSend(email,userId);
+      return response.formatter.ok({}, true, "INVITATION_SEND_SUCCESS");
+    } catch (error) {
+      console.log("ERR::", error);
+      return response.formatter.error(
+        {},
+        false,
+        "INVITATION_SEND_FAILED",
+        error
+      );
     }
   }
 

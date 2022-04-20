@@ -12,18 +12,18 @@ import {
 
 export class roleDTO{
     @IsString()
-    roleName: String;
+    roleName: string;
 
     @IsString()
-    description: String;
+    description: string;
 }
 
 export class roleUpdateDTO{
   @IsString()
   @IsOptional()
-  roleName: String;
+  roleName: string;
 
   @IsString()
   @IsOptional()
-  description: String;
+  description: string;
 }

@@ -19,6 +19,10 @@ export class UserDTO {
 
   @IsNumber()
   phoneNo: number;
+
+  @IsString()
+  @IsOptional()
+  adminId: string;
 }
 
 export class UserEmailDTO {
@@ -29,9 +33,17 @@ export class UserEmailDTO {
   password: string;
 }
 
+export class sendUserJoinDTO{
+  @IsEmail()
+  email: string;
+
+  @IsString()
+  userId: string;
+}
+
 export class OtpSendDTO {
   @IsEmail()
-  email: String;
+  email: string;
 }
 
 export class matchOtpDTO {

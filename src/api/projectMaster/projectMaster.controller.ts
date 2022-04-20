@@ -13,6 +13,7 @@ import Mongoose from "mongoose";
 import ProjectMasterService from "./projectMaster.service";
 import { ProjectDTO, UpdateProjectDTO } from "./projectMaster.validator";
 import { Auth } from "../../middleware/auth";
+import { userJoinMailSend } from "../../../src/utils/comman/mailSend";
 
 @JsonController("/projectMaster")
 @UseBefore(Auth)
@@ -79,21 +80,11 @@ export default class ProjectController {
             'as': 'frontLanguageId'
           }
         }, {
-          '$unwind': {
-            'path': '$frontLanguageId', 
-            'preserveNullAndEmptyArrays': true
-          }
-        }, {
           '$lookup': {
             'from': 'languagemasters', 
             'localField': 'backLanguageId', 
             'foreignField': '_id', 
             'as': 'backLanguageId'
-          }
-        }, {
-          '$unwind': {
-            'path': '$backLanguageId', 
-            'preserveNullAndEmptyArrays': true
           }
         }
       ]
@@ -161,7 +152,7 @@ export default class ProjectController {
       update.updatedBy = request.data.id;
       const data = await this.projectMasterService.update({_id:id},{$set:update});
       return  response.formatter.ok(
-        { },
+        data,
         true,
         "PROJECT_UPDATE_SUCCESS"
       );

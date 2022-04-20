@@ -30,6 +30,7 @@ import {
         try{
           const { isFrontEnd,isBackEnd,language } = body;
           const languageExist = await this.languageMasterService.findOne({language});
+          if(isFrontEnd === true)
           if(languageExist){
             return response.formatter.error({}, false, "LANGUAGE_ALREADY_EXISTS");
           }

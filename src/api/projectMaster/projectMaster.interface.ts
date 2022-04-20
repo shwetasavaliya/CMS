@@ -5,8 +5,8 @@ export interface IProjectMaster extends Mongoose.Document {
   projectAbstract?: String;
   isFrontEnd? : Boolean;
   isBackEnd? : Boolean;
-  frontLanguageId? : String;
-  backLanguageId? : String;
+  frontLanguageId? : Array<String>;
+  backLanguageId? : Array<String>;
   databaseName?: String;
   deployment?: String;
   currentStatus?: Boolean;

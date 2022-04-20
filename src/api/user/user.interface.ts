@@ -4,6 +4,8 @@ export interface IUser extends Mongoose.Document {
   userName?: String;
   email?: String;
   password?: String;
+  role?: String;
   phoneNo?: Number;
-  OTP?: String;
+  adminId?: String;
+  OTP?: String; 
 }

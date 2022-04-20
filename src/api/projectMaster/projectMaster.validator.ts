@@ -6,81 +6,82 @@ import {
   IsString,
   IsBoolean,
   IsNumber,
+  IsArray,
   ValidateNested,
 } from "class-validator";
 
 export class ProjectDTO {
   @IsString()
-  projectTitle: String;
+  projectTitle: string;
 
   @IsString()
-  projectAbstract: String;
+  projectAbstract: string;
 
   @IsBoolean()
-  isFrontEnd: Boolean;
+  isFrontEnd: boolean;
 
   @IsBoolean()
-  isBackEnd: Boolean;
+  isBackEnd: boolean;
 
-  @IsString()
+  @IsArray()
   @IsOptional()
-  frontLanguageId: String;
+  frontLanguageId: string;
 
-  @IsString()
+  @IsArray()
   @IsOptional()
-  backLanguageId: String;
+  backLanguageId: string;
 
   @IsString()
-  databaseName: String;
+  databaseName: string;
 
   @IsString()
-  deployment: String;
+  deployment: string;
 
   @IsBoolean()
-  currentStatus: Boolean;
+  currentStatus: boolean;
 
   @IsString()
-  startDate: String;
+  startDate: string;
 }
 
 export class UpdateProjectDTO{
   @IsString()
   @IsOptional()
-  projectTitle: String;
+  projectTitle: string;
 
   @IsString()
   @IsOptional()
-  projectAbstract: String;
+  projectAbstract: string;
 
   @IsBoolean()
   @IsOptional()
-  isFrontEnd: Boolean;
+  isFrontEnd: boolean;
 
   @IsBoolean()
   @IsOptional()
-  isBackEnd: Boolean;
+  isBackEnd: boolean;
+
+  @IsArray()
+  @IsOptional()
+  frontLanguageId: string;
+
+  @IsArray()
+  @IsOptional()
+  backLanguageId: string;
 
   @IsString()
   @IsOptional()
-  frontLanguageId: String;
+  databaseName: string;
 
   @IsString()
   @IsOptional()
-  backLanguageId: String;
-
-  @IsString()
-  @IsOptional()
-  databaseName: String;
-
-  @IsString()
-  @IsOptional()
-  deployment: String;
+  deployment: string;
 
   @IsBoolean()
   @IsOptional()
-  currentStatus: Boolean;
+  currentStatus: boolean;
 
   @IsString()
   @IsOptional()
-  startDate: String;
+  startDate: string;
 }
