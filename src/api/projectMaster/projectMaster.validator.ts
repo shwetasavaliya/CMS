@@ -25,11 +25,11 @@ export class ProjectDTO {
 
   @IsArray()
   @IsOptional()
-  frontLanguageId: string;
+  frontLanguageId: Array<string>;
 
   @IsArray()
   @IsOptional()
-  backLanguageId: string;
+  backLanguageId: Array<string>;
 
   @IsString()
   databaseName: string;
@@ -63,11 +63,11 @@ export class UpdateProjectDTO{
 
   @IsArray()
   @IsOptional()
-  frontLanguageId: string;
+  frontLanguageId: Array<string>;;
 
   @IsArray()
   @IsOptional()
-  backLanguageId: string;
+  backLanguageId: Array<string>;;
 
   @IsString()
   @IsOptional()

@@ -94,7 +94,7 @@ import {
     }
   }
 
-  @Put("/update/:id",{ transformResponse: true })
+  @Post("/update/:id",{ transformResponse: true })
   async updateLanguage(
     @Req() request: any,
     @Res() response: any,

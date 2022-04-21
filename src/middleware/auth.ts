@@ -2,7 +2,6 @@ import * as jwt from "jsonwebtoken";
 import { SECRET_KEY } from "../config";
 import { Req, Res } from "routing-controllers";
 import { NextFunction } from "express";
-
 export class Auth {
   use(@Req() request: any, @Res() response: any, next: NextFunction) {
     
