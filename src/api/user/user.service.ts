@@ -63,4 +63,8 @@ export default class UserService implements IBaseService<IUser> {
     delete = async (query: any): Promise<Nullable<IUser>> => {
         return this.model.findByIdAndRemove('id');
     };
+
+     aggregate = async (pipeline: any[]):Promise<IUser[]>=> {
+        return this.model.aggregate(pipeline);
+    }
 }

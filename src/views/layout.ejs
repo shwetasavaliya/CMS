@@ -5,17 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join User</title>
+    <style>
+        .data {
+          background-color:navy;
+          color: white;
+          padding: 14px 25px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          border: 1px,solid,black;
+        }
+        a{
+            margin-left: 20px;
+        }
+        a:hover, a:active {
+          background-color:rgb(74, 42, 255);
+          border: 1px,solid,black;
+        }
+        </style>
 </head>
-<style>
-    a:hover, a:active{
-        background-color: blue;
-    }
-</style>
 
 <body>
-    <div style = "border: 1px solid black">
-        <h2>You've been invited to CMS</h2>
-        <a href=<%= "http://localhost:3000/userregistration/?userId="+ data %>>Join Now</a>
+    <div style = "border: 3px solid black">
+        <h2 style="padding-left: 10px;">You've been invited to CMS</h2>
+        <a class="data" style="color: white; margin-bottom: 5px;" href=<%= "http://localhost:3000/userregistration/?token="+ data %>>Join Now</a>
     </div>
 </body>
 </html>

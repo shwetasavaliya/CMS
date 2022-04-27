@@ -7,7 +7,8 @@ import initRoute from './routes';
 import connectMongoDB from './utils/db/mongo.db';
 import { useContainer } from 'typeorm';
 import { Container } from 'typeorm-typedi-extensions';
-import swaggerRoutes from './swagger/swagger-handler'
+import swaggerRoutes from './swagger/swagger-handler';
+import path from 'path'
 
 
 class Server {
@@ -17,7 +18,9 @@ class Server {
     constructor() {
         this.app.use(json())
         this.app.use(responseEnhancer());
-        this.app.use(cors());
+        this.app.use(cors({
+            origin: "*"
+        }));
         this.app.use('/api-docs', swaggerRoutes);
         initRoute(this.app)
         useContainer(Container);

@@ -13,7 +13,9 @@
     "PROJECT_ADD_SUCCESS":"Project Add Success",
     "PROJECT_DISPLAY_SUCCESS":"Project Display Success",
     "PROJECT_DELETE_SUCCESS":"Project Delete Success",
-    "PROJECT_UPDATE_SUCCESS":"Project Update Success"
+    "PROJECT_UPDATE_SUCCESS":"Project Update Success",
+    "INVITATION_SEND_SUCCESS":"Invitation Send Success",
+    "PROJECT_GET_SUCCESS":"Project get Success"
   },
   "error": {
     "USER_REGISTER_FAILED": "Error occurred while register user.",
@@ -35,6 +37,8 @@
     "PROJECT_ADD_FAILED":"Project Add failed",
     "PROJECT_DISPLAY_FAILED":"Project Display Failed",
     "PROJECT_DELETE_FAILED":"Project Delete Failed",
-    "PROJECT_UPDATE_FAILED":"Project Update Failed"
+    "PROJECT_UPDATE_FAILED":"Project Update Failed",
+    "INVITATION_SEND_FAILED":"Inviattion Send Failed",
+    "PROJECT_GET_FAILED":"Project Get Failed"
   }
 }

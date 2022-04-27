@@ -22,7 +22,7 @@ export class UserDTO {
 
   @IsString()
   @IsOptional()
-  adminId: string;
+  token: string;
 }
 
 export class UserEmailDTO {
@@ -31,14 +31,27 @@ export class UserEmailDTO {
 
   @IsString()
   password: string;
+
+  @IsString()
+  @IsOptional()
+  token: string;
 }
+
+export class getProject {
+  @IsString()
+  id: string;
+}
+
 
 export class sendUserJoinDTO{
   @IsEmail()
   email: string;
 
   @IsString()
-  userId: string;
+  adminId: string;
+
+  @IsString()
+  projectId: string;
 }
 
 export class OtpSendDTO {

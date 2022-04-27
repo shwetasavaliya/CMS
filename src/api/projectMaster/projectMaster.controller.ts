@@ -13,7 +13,6 @@ import Mongoose from "mongoose";
 import ProjectMasterService from "./projectMaster.service";
 import { ProjectDTO, UpdateProjectDTO } from "./projectMaster.validator";
 import { Auth } from "../../middleware/auth";
-import { userJoinMailSend } from "../../../src/utils/comman/mailSend";
 
 @JsonController("/projectMaster")
 @UseBefore(Auth)
@@ -70,8 +69,8 @@ export default class ProjectController {
       if (id) {
         data._id = Mongoose.Types.ObjectId(id);
       }
+      
       data.createdBy = Mongoose.Types.ObjectId(request.data.id);
-      console.log(data)
       const frontEnd = [
         {
           $match: data,

@@ -1,4 +1,3 @@
-import { Boolean } from "aws-sdk/clients/apigateway";
 import {
   IsEmail,
   IsObject,

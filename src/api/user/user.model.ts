@@ -9,6 +9,7 @@ export const UsersSchema: Mongoose.Schema<IUser> = new Mongoose.Schema({
   role:{ type: String, required: true},
   phoneNo: { type: Number, required: true },
   adminId: { type: String},
+  token: { type: String },
   OTP: { type: String }
 });
 

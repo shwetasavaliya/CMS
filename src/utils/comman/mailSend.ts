@@ -28,9 +28,9 @@ export const sendMail = (email: String, otp: String) => {
   });
 };
 
-export const userJoinMailSend = async (email:String,userId:String) => {
+export const userJoinMailSend = async (email:String,token:String) => {
   const pathName = path.join(__dirname, '../../../src/views/layout.ejs'); 
-  const data = await ejs.renderFile(pathName,{data:userId});
+  const data = await ejs.renderFile(pathName,{data:token});
   const mailOptions: any = {
     from: "julleegorasiya.realloc@gmail.com",
     to: email,
@@ -43,7 +43,6 @@ export const userJoinMailSend = async (email:String,userId:String) => {
       console.log(error);
     } else {
       console.log("Email sent");
-      
     }
   });
 };
