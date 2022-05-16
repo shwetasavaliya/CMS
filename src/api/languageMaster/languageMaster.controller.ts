@@ -4,7 +4,6 @@ import {
     JsonController,
     Post,
     Delete,
-    Put,
     Req,
     Res,
     UseBefore,
@@ -12,9 +11,6 @@ import {
   import LanguageMasterService from "./languageMaster.service";
   import { LanguageDTO,UpdateLanguageDTO } from "./languageMaster.validation";
   import { Auth } from "../../middleware/auth";
-  import { get } from "http";
-  import { request } from "https";
-  import { response } from "express";
   
   @JsonController("/languageMaster")
   @UseBefore(Auth)

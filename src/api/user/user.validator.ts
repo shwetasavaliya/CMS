@@ -37,9 +37,9 @@ export class UserEmailDTO {
   token: string;
 }
 
-export class getProject {
+export class getProjectDTO {
   @IsString()
-  id: string;
+  userId: string;
 }
 
 

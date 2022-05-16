@@ -63,4 +63,8 @@ export default class RoleService implements IBaseService<IRole> {
     delete = async (query: any): Promise<Nullable<IRole>> => {
         return this.model.findByIdAndRemove(query);
     };
+
+    aggregate = async (pipeline: any[]):Promise<IRole[]>=> {
+        return this.model.aggregate(pipeline);
+    }
 }

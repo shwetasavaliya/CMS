@@ -6,6 +6,7 @@ export const UserProjectSchema: Mongoose.Schema<IUserProject> = new Mongoose.Sch
     projectId : { type:Mongoose.Schema.Types.ObjectId,ref:"projectMaster" },
     userId : { type:Mongoose.Schema.Types.ObjectId,ref:"user"},
     adminId : { type:Mongoose.Schema.Types.ObjectId,ref:"user"},
+    role : [{ type:Mongoose.Schema.Types.ObjectId, ref:"roleMaster" }],
     createdAt : { type:Date,default:Date.now() }
 });
 

@@ -7,6 +7,7 @@ import {
   IsNumber,
   ValidateNested,
   isString,
+  IsArray
 } from "class-validator";
 
 export class roleDTO{
@@ -25,4 +26,20 @@ export class roleUpdateDTO{
   @IsString()
   @IsOptional()
   description: string;
+}
+
+export class getuserDTO{
+  @IsString()
+  adminId: string;
+}
+
+export class assignRole{
+  @IsString()
+  userId: string;
+
+  @IsString()
+  projectId: string;
+
+  @IsArray()
+  roleId: Array<string>
 }

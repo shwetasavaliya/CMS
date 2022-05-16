@@ -17,7 +17,7 @@ import {
   OtpSendDTO,
   matchOtpDTO,
   resetPasswordDTO,
-  getProject
+  getProjectDTO
 } from "./user.validator";
 import { Auth } from "../../middleware/auth";
 import {
@@ -138,7 +138,7 @@ export default class UserController {
         const userExist = await this.userProjectService.findOne({projectId:decodedProjectId,userId:userEmail._id})
         if(!userExist)
         await this.userProjectService.create(projectData);
-      }
+      }    
       return response.formatter.ok(
         { ...userEmail, jwtToken },
         true,
@@ -161,8 +161,9 @@ export default class UserController {
       const encodedProjectId = base64.encode(projectId);
       const encodedEmail = base64.encode(email);
       var token = uuidv1();
-      await this.userService.updateOne({_id:adminId},{$set:{token}});
-      var token =`${encodedEmail}|${encodedProjectId}|` + token;
+      await this.userService.updateOne({_id:adminId,role:"admin"},{$set:{token}},{upsert:false});
+      var token =`${encodedEmail}|${encodedProjectId}|` + token; 
+      // console.log(token);
       userJoinMailSend(email,token);
       return response.formatter.ok({}, true, "INVITATION_SEND_SUCCESS");
     } catch (error) {
@@ -175,16 +176,16 @@ export default class UserController {
       );
     }
   }
-  @Get("/getProject" , { transformResponse: true })
-  async getProject(@Req() request: any, @Res() response: any,@Body({ validate: true }) body: getProject){
+  @Post("/getUserProject" , { transformResponse: true })
+  async getProject(@Req() request: any, @Res() response: any,@Body({ validate: true }) body: getProjectDTO){
     try {
-      const { id } = body
+      const { userId } = body
       const project = [
         {
           '$match': {
-            'userId':  Mongoose.Types.ObjectId(id)
+            'userId':  Mongoose.Types.ObjectId(userId)
           }
-        }, {
+        }, { 
           '$lookup': {
             'from': 'projectmasters', 
             'localField': 'projectId', 
@@ -212,28 +213,28 @@ export default class UserController {
   }
 
 
-  @Post("/compareInviteEmail", { transformResponse: true })
-  async compareInviteEmail(
-    @Req() request: any,
-    @Res() response: any,
-    @Body({ validate: true }) body: OtpSendDTO
-  ){
-    try {
-      const { email } = body;
-      const data = await this.userService.findOne({email});
-      console.log(data);
-      if(!data){
-        return response.formatter.error({email}, false, "USER_DOESN'T_EXIST");
-      }
-      return response.formatter.ok(
-        { email },
-        true,
-        "USER_EXIST"
-      );
-    } catch (error) {
-      return response.formatter.error({}, false, "USER_EXIST_FAILED", error);
-    }
-  }
+  // @Post("/compareInviteEmail", { transformResponse: true })
+  // async compareInviteEmail(
+  //   @Req() request: any,
+  //   @Res() response: any,
+  //   @Body({ validate: true }) body: OtpSendDTO
+  // ){
+  //   try {
+  //     const { email } = body;
+  //     const data = await this.userService.findOne({email});
+  //     console.log(data);
+  //     if(!data){
+  //       return response.formatter.error({email}, false, "USER_DOESN'T_EXIST");
+  //     }
+  //     return response.formatter.ok(
+  //       { email },
+  //       true,
+  //       "USER_EXIST"
+  //     );
+  //   } catch (error) {
+  //     return response.formatter.error({}, false, "USER_EXIST_FAILED", error);
+  //   }
+  // }
 
   @Get("/get")
   @UseBefore(Auth)
@@ -263,7 +264,7 @@ export default class UserController {
       let otpGet = otp.toString().padStart(4, "0");
       await this.userService.update(
         { _id: userEmail._id },
-        { $set: { OTP: otpGet } }
+        { $set: { OTP: otpGet }}
       );
       sendMail(userEmail.email, otpGet);
       return response.formatter.ok({}, true, "OTP_SEND_SUCCESS");
@@ -284,13 +285,13 @@ export default class UserController {
       const userEmail = await this.userService.findOne({ email, OTP: otp });
       if (!userEmail)
         return response.formatter.error({}, false, "OTP_DOES_NOT_MATCH");
-      await this.userService.updateOne({ email }, { $set: { OTP: " " } });
+      await this.userService.updateOne({ email }, { $set: { OTP: " " } },{upsert:false});
       return response.formatter.ok({}, true, "OTP_MATCH_SUCCESS");
     } catch (error) {
       console.log("ERR::", error);
       return response.formatter.error({}, false, "OTP_VERIFY_FAILED", error);
     }
-  }
+  } 
 
   @Post("/resetPassword")
   async resetPassword(
